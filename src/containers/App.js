@@ -19,20 +19,14 @@ class App extends Component {
       const personIndex=this.state.persons.findIndex(p => {
         return p.id===id;
       });
-
       const person ={
         ...this.state.persons[personIndex]
       };
-
       person.name=event.target.value;
-
       const persons = [...this.state.persons];
       persons[personIndex] = person;
-
-      
      this.setState({persons: persons })
     }
-
     togglePersonHandler =()=>{
       const doesShow = this.state.showPersons;
       this.setState({showPersons:!doesShow});
@@ -46,7 +40,6 @@ class App extends Component {
     }
   render() {
      
-
     let persons=null;
     if(this.state.showPersons){
       persons=(
@@ -57,26 +50,15 @@ class App extends Component {
           changed={this.nameChangedHandler}/>
         </div>
       );
-      /*style.backgroundColor= "red";
-      style[":hover"]={
-        backgroundColor: "salmon",
-        color: "black"
-      }*/
     }
 
-  
-    
-
-    return (
-     // <StyleRoot> 
+    return ( 
       <div className="App">
         <Cockpit showPersons={this.state.showPersons}
         persons={this.state.persons}
         clicked={this.togglePersonHandler}/>
-        {/* <button  onClick={this.togglePersonHandler}>Toggle Person</button> */}
         {persons}
       </div>
-      //</StyleRoot>
     );
   }
 }
