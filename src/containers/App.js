@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import classes from './App.css';
-import Person from './Components/Persons/Person.js';
+import Persons from '../components/Persons/Persons';
  import styled from 'styled-components';
+ import Cockpit from '../components/Cockpit/Cockpit';
 //import Radium, {StyleRoot} from 'radium';
 
 class App extends Component {
@@ -45,26 +45,16 @@ class App extends Component {
       this.setState({persons:persons}); 
     }
   render() {
-     const StyledButton = styled.button` //creating a styled button using styled-components
-       background-color: ${props => props.alt ? "red": "green"};
-       &:hover {
-         background-color: ${props => props.alt ? "salmon": "lightGreen"};
-         color: black;
-       }
-     `;
+     
 
     let persons=null;
     if(this.state.showPersons){
       persons=(
         <div>
-          {
-            this.state.persons.map( (person, index)  =>{
-              return <Person click={() => this.deletePersonHandler(index)} 
-              name={person.name} age={person.age} 
-              changed={(event) => this.nameChangedHandler(event, person.id)}
-              key={person.id}/>
-            })
-          }
+          <Persons 
+          persons={this.state.persons}
+          clicked={this.deletePersonHandler}
+          changed={this.nameChangedHandler}/>
         </div>
       );
       /*style.backgroundColor= "red";
@@ -74,21 +64,15 @@ class App extends Component {
       }*/
     }
 
-    const classes= [];
-    if(this.state.persons.length <=2){
-      classes.push("red"); //classes=["red"]
-    }
-    if(this.state.persons.length <=1){
-      classes.push(" bold"); //classes=["red", "bold"]; 
-    }
+  
     
 
     return (
      // <StyleRoot> 
       <div className="App">
-        <h1 >Hi yash!!</h1>
-        <p className={classes.join('')}>This is working</p>
-        <StyledButton alt={this.state.showPersons} onClick={this.togglePersonHandler}>Toggle Person</StyledButton>
+        <Cockpit showPersons={this.state.showPersons}
+        persons={this.state.persons}
+        clicked={this.togglePersonHandler}/>
         {/* <button  onClick={this.togglePersonHandler}>Toggle Person</button> */}
         {persons}
       </div>
